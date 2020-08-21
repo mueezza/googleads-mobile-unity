@@ -28,9 +28,9 @@ namespace GoogleMobileAds.Unity
         // Ad event fired when the rewarded ad has been received.
         public event EventHandler<EventArgs> OnAdLoaded;
         // Ad event fired when the rewarded ad has failed to load.
-        public event EventHandler<AdErrorEventArgs> OnAdFailedToLoad;
+        public event EventHandler<LoadAdErrorClientEventArgs> OnAdFailedToLoad;
         // Ad event fired when the rewarded ad has failed to show.
-        public event EventHandler<AdErrorEventArgs> OnAdFailedToShow;
+        public event EventHandler<AdErrorClientEventArgs> OnAdFailedToShow;
         // Ad event fired when the rewarded ad is opened.
         public event EventHandler<EventArgs> OnAdOpening;
         // Ad event fired when the rewarded ad has rewarded the user.
@@ -118,8 +118,9 @@ namespace GoogleMobileAds.Unity
             {
                 if (OnAdFailedToLoad != null)
                 {
-                    OnAdFailedToLoad.Invoke(this, new AdErrorEventArgs()
+                    OnAdFailedToLoad.Invoke(this, new LoadAdErrorClientEventArgs()
                     {
+                        LoadAdErrorClient = null,
                         Message = "Prefab Ad is Null"
                     });
                 }
@@ -170,8 +171,9 @@ namespace GoogleMobileAds.Unity
             {
                 if (OnAdFailedToShow != null)
                 {
-                    OnAdFailedToShow.Invoke(this, new AdErrorEventArgs()
+                    OnAdFailedToShow.Invoke(this, new AdErrorClientEventArgs()
                     {
+                        AdErrorClient = null,
                         Message = "No Ad Loaded"
                     });
                 }

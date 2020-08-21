@@ -24,10 +24,19 @@ namespace GoogleMobileAds.Android
     {
         private AndroidJavaObject adFormat;
         private AndroidJavaObject androidResponseInfo;
-        public ResponseInfoClient(AndroidJavaObject adFormat)
+
+        public ResponseInfoClient(ResponseInfoClientType TYPE, AndroidJavaObject androidJavaObject)
         {
-            this.adFormat = adFormat;
-            androidResponseInfo = this.adFormat.Call<AndroidJavaObject>("getResponseInfo");
+            if (TYPE == ResponseInfoClientType.AdLoaded)
+            {
+                this.adFormat = androidJavaObject;
+                androidResponseInfo = this.adFormat.Call<AndroidJavaObject>("getResponseInfo");
+            }
+            else if (TYPE == ResponseInfoClientType.AdError)
+            {
+                androidResponseInfo = androidJavaObject.Call<AndroidJavaObject>("getResponseInfo");
+            }
+
         }
 
         public string GetMediationAdapterClassName()

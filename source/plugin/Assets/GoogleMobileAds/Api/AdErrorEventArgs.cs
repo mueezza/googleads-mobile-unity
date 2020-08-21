@@ -1,4 +1,4 @@
-// Copyright (C) 2020 Google, LLC
+// Copyright (C) 2018 Google, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,13 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace GoogleMobileAds.Common
+using System;
+
+namespace GoogleMobileAds.Api
 {
-    public interface IResponseInfoClient
+    public class AdErrorEventArgs : EventArgs
     {
-        string GetMediationAdapterClassName();
+        public AdError AdError { get; set; }
 
-        string GetResponseId();
-
+        [Obsolete ("use AdError.GetMessage() instead.")]
+        public string Message { get; set; }
     }
 }

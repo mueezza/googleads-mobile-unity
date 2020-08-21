@@ -1,4 +1,4 @@
-// Copyright (C) 2015 Google, Inc.
+// Copyright (C) 2020 Google, LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,13 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 
-namespace GoogleMobileAds.Api
-{
-    // Event that occurs when an ad fails to load.
-    public class AdFailedToLoadEventArgs : EventArgs
+using GoogleMobileAds.Common;
+
+namespace GoogleMobileAds.Api {
+    public class LoadAdError : AdError
     {
-        public string Message { get; set; }
+       ILoadAdErrorClient client;
+
+       public LoadAdError(ILoadAdErrorClient client) : base(client)
+       {
+          this.client = client;
+       }
+
+       public ResponseInfo GetResponseInfo()
+       {
+          return new ResponseInfo(client.GetResponseInfoClient());
+       }
+
+       public override string ToString()
+        {
+            return client.ToString();
+        }
     }
 }

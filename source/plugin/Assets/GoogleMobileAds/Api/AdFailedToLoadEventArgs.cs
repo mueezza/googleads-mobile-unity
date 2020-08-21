@@ -12,13 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace GoogleMobileAds.Common
+using System;
+
+namespace GoogleMobileAds.Api
 {
-    public interface IResponseInfoClient
+    // Event that occurs when an ad fails to load.
+    public class AdFailedToLoadEventArgs : EventArgs
     {
-        string GetMediationAdapterClassName();
+        public LoadAdError LoadAdError { get; set; }
 
-        string GetResponseId();
-
+        [Obsolete ("Use LoadAdError.GetMessage() instead.")]
+        public string Message { get; set; }
     }
 }

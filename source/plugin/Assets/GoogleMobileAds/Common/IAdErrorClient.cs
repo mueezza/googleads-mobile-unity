@@ -12,13 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace GoogleMobileAds.Common
-{
-    public interface IResponseInfoClient
+using System;
+
+namespace GoogleMobileAds.Common {
+    public interface IAdErrorClient
     {
-        string GetMediationAdapterClassName();
-
-        string GetResponseId();
-
+        int GetCode();
+        string GetDomain();
+        string GetMessage();
+        IAdErrorClient GetCause();
     }
 }

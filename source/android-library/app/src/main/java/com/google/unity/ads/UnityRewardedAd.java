@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdValue;
+import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.OnPaidEventListener;
 import com.google.android.gms.ads.ResponseInfo;
 import com.google.android.gms.ads.rewarded.RewardItem;
@@ -100,14 +101,13 @@ public class UnityRewardedAd {
                     }
 
 
-                    public void onRewardedAdFailedToLoad(final int errorCode) {
+                    public void onRewardedAdFailedToLoad(final LoadAdError error) {
                         if (callback != null) {
                             new Thread(new Runnable() {
                                 @Override
                                 public void run() {
                                     if (callback != null) {
-                                        callback.onRewardedAdFailedToLoad(
-                                                PluginUtils.getErrorReason(errorCode));
+                                        callback.onRewardedAdFailedToLoad(error);
                                     }
                                 }
                             }).start();
@@ -194,14 +194,13 @@ public class UnityRewardedAd {
                             }
                         }
 
-                        public void onRewardedAdFailedToShow(final int errorCode) {
+                        public void onRewardedAdFailedToShow(final LoadAdError error) {
                             if (callback != null) {
                                 new Thread(new Runnable() {
                                     @Override
                                     public void run() {
                                         if (callback != null) {
-                                            callback.onRewardedAdFailedToShow(
-                                                    PluginUtils.getErrorReason(errorCode));
+                                            callback.onRewardedAdFailedToShow(error);
                                         }
                                     }
                                 }).start();
